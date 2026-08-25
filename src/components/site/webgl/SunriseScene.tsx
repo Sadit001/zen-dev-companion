@@ -90,7 +90,9 @@ function Plane({ scrollRef }: { scrollRef: React.RefObject<number> }) {
       uPointer: { value: new THREE.Vector2(0, 0) },
       uSun: { value: new THREE.Color("#ffb347") },
       uPeach: { value: new THREE.Color("#ffd7bd") },
-      uSky: { value: new THREE.Color("#cfe0f2") },
+      // matches the --sky design token (oklch(0.94 0.03 235)) so the canvas
+      // compositing over the sunrise gradient never creates a color break
+      uSky: { value: new THREE.Color("#d9effd") },
       uBase: { value: new THREE.Color("#fbf6f0") },
     }),
     [],
