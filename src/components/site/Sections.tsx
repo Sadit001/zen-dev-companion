@@ -234,10 +234,13 @@ export function Journal() {
   const p = useSpring(scrollYProgress, { stiffness: 80, damping: 26, mass: 0.4 });
   const progress = reduced ? scrollYProgress : p;
 
-  // Scroll-linked gradient: page background at top, sunrise colors rising from bottom
-  const skyStop = useTransform(progress, [0, 0.45, 1], ["120%", "95%", "55%"]);
-  const peachStop = useTransform(progress, [0, 0.45, 1], ["150%", "120%", "85%"]);
-  const bg = useMotionTemplate`linear-gradient(180deg, var(--background) 0%, var(--background) 45%, var(--sky) ${skyStop}, var(--peach) ${peachStop})`;
+  // Scroll-linked gradient: page background at top, a warm sunrise band rising
+  // through the section, and a --sky base that lands exactly on Contact's top
+  // gradient stop — so the Journal → Contact boundary is one continuous surface.
+  // The gradient settles by ~75% progress, before the boundary enters view.
+  const peachStop = useTransform(progress, [0, 0.4, 0.75], ["160%", "115%", "72%"]);
+  const skyStop = useTransform(progress, [0, 0.4, 0.75], ["135%", "102%", "88%"]);
+  const bg = useMotionTemplate`linear-gradient(180deg, var(--background) 0%, var(--background) 45%, var(--peach) ${peachStop}, var(--sky) ${skyStop})`;
 
   return (
     <motion.section

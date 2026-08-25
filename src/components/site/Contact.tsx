@@ -85,7 +85,15 @@ export function Contact() {
 
   return (
     <footer id="contact" className="sunrise-bg grain-overlay relative">
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* the WebGL backdrop fades in from transparent so its top edge never
+          forms a visible boundary against the Journal section above */}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        style={{
+          WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 38%)",
+          maskImage: "linear-gradient(to bottom, transparent 0%, black 38%)",
+        }}
+      >
         <WebGLBackdrop className="absolute inset-0 opacity-40" />
       </div>
 
